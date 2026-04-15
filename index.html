@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Onboarding Flow</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrapper">
+  <div class="progress-bar" id="progress"></div>
+</div>
+
+<!-- ================= PAGE 1 ================= -->
+<section class="page active">
+
+  <div class="card">
+
+    <h1>Załóż konto</h1>
+    <p class="subtitle">Zacznij w mniej niż 2 minuty.</p>
+
+    <button class="btn google">Continue with Google</button>
+    <button class="btn linkedin">Continue with LinkedIn</button>
+
+    <div class="divider">lub</div>
+
+    <input type="email" placeholder="Twój email" />
+    <button class="btn primary">Utwórz konto</button>
+
+    <p class="micro">Bez hasła — wysyłamy magic link.</p>
+
+  </div>
+
+  <button class="next">→</button>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section class="page">
+
+  <button class="back">←</button>
+
+  <div class="card">
+
+    <h1>Podstawowe dane</h1>
+    <p class="subtitle">Tylko do personalizacji konta.</p>
+
+    <input type="text" placeholder="Imię i nazwisko" />
+    <input type="text" placeholder="Firma" />
+    <input type="text" placeholder="Rola" />
+
+    <button class="btn primary">Dalej</button>
+
+    <p class="micro">Dołączasz do tysięcy użytkowników.</p>
+
+  </div>
+
+  <button class="next">→</button>
+</section>
+
+<!-- ================= PAGE 3 ================= -->
+<section class="page">
+
+  <button class="back">←</button>
+
+  <div class="trust">
+
+    <p class="badge">SOCIAL PROOF</p>
+
+    <h1>Zaufało nam już ponad</h1>
+
+    <div class="big-number">5 000+ użytkowników</div>
+
+    <p class="subtitle">
+      Produkt używany codziennie przez zespoły na całym świecie.
+    </p>
+
+    <div class="stats">
+      <div>
+        <h2>120k+</h2>
+        <p>operacji</p>
+      </div>
+
+      <div>
+        <h2>98%</h2>
+        <p>satysfakcji</p>
+      </div>
+
+      <div>
+        <h2>24/7</h2>
+        <p>uptime</p>
+      </div>
+    </div>
+
+    <div class="logos">
+      <p>Branże:</p>
+      <span>Tech • SaaS • Finance • Agencies</span>
+    </div>
+
+  </div>
+
+  <button class="next">→</button>
+</section>
+
+<!-- ================= PAGE 4 ================= -->
+<section class="page">
+
+  <button class="back">←</button>
+
+  <div class="final">
+
+    <h1>Gotowe 🚀</h1>
+
+    <p class="subtitle">
+      Twój workspace jest aktywny — możesz zacząć.
+    </p>
+
+    <div class="onboarding-box">
+      <h3>Start:</h3>
+      <ul>
+        <li>✔ Utwórz projekt</li>
+        <li>✔ Dodaj zespół</li>
+        <li>✔ Skonfiguruj workflow</li>
+      </ul>
+    </div>
+
+    <button class="btn primary big">Wejdź do produktu</button>
+
+    <p class="micro">Start zajmuje ~3 min</p>
+
+  </div>
+
+</section>
+
+<script>
+  const pages = document.querySelectorAll(".page");
+  const nextButtons = document.querySelectorAll(".next");
+  const backButtons = document.querySelectorAll(".back");
+  const progress = document.getElementById("progress");
+
+  let index = 0;
+
+  function update(i) {
+    pages.forEach(p => p.classList.remove("active"));
+    pages[i].classList.add("active");
+
+    const percent = ((i + 1) / pages.length) * 100;
+    progress.style.width = percent + "%";
+  }
+
+  nextButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      index = Math.min(index + 1, pages.length - 1);
+      update(index);
+    });
+  });
+
+  backButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      index = Math.max(index - 1, 0);
+      update(index);
+    });
+  });
+
+  update(index);
+</script>
+
+</body>
+</html>
